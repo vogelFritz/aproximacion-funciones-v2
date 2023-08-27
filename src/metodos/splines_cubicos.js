@@ -125,7 +125,6 @@ export const splinesCubicos = ( x, f ) => {
     armarCoefSplines( h, u, d, l );
     c = thomas( u, d, l, b );
 
-    console.log({ f, c, h });
     n = h.length;
     for( let i = 0; i < n; i++ ) {
         bCoef.push( ( f[i+1] - f[i] ) / h[i] - h[i] * ( 2 * c[i] + c[i+1] ) / 3. );

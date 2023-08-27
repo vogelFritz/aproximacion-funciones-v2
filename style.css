@@ -75,6 +75,11 @@ main {
   transform-origin: 0;
 }
 
+.btn {
+  background-color:rgb(105, 60, 0);
+  color:rgb(128, 183, 73);
+}
+
 footer {
   background-color: cadetblue;
   z-index: 4;

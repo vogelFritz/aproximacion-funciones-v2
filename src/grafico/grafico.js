@@ -1,13 +1,14 @@
 import { agregarZoom, volverArrastrable } from './movimiento';
 import { lagrange, polinomio } from '../metodos/lagrange';
 import { minimosCuadrados } from '../metodos/minimos_cuadrados';
-import { splinesCubicos } from '../metodos/splines_cubicos';
+import { splinesCubicos, polinomioSpline } from '../metodos/splines_cubicos';
 
 // CLASES
 
 export class Grafico {
 	divHTML;
     ventanaHTML;
+	btnAgregarPuntosAct = false;
 	puntos  = [];
 	puntosX = [];
 	puntosY = [];
@@ -17,6 +18,13 @@ export class Grafico {
         this.ventanaHTML = document.querySelector('.ventana');
         volverArrastrable( this.divHTML, this.ventanaHTML );
 		agregarZoom( this.divHTML );
+		this.divHTML.addEventListener( 'click', (e) => {
+			if( this.btnAgregarPuntosAct ) {
+				const posX = e.clientX - this.divHTML.offsetLeft,
+					posY = e.clientY - this.divHTML.offsetTop;
+				this.agregarPunto( new Punto( posX, posY ) );
+			}
+		} );
 	}
 	agregarPunto( punto ) {
 		punto.divHTML.style.top  = `${ (punto.y / this.divHTML.offsetHeight ) * 100 }%`;
@@ -43,6 +51,9 @@ export class Grafico {
 	borrarTodo() {
 		this.divHTML.replaceChildren('');
 	}
+	toggleBtnAgregarPuntos() {
+		this.btnAgregarPuntosAct = !this.btnAgregarPuntosAct;
+	}
 	obtenerCoefLagrange() { 
 		return lagrange( this.puntosX, this.puntosY ); 
 	}
@@ -56,7 +67,15 @@ export class Grafico {
 		this.graficarFuncion( ( x ) => polinomio(x, coef) );
 	}
 	graficarSplinesCubicos() {
-		
+		const h = 1;
+		let coef = this.obtenerCoefSplinesCubicos(),
+			x = this.puntosX[0];
+		for( let i = 0; i < this.puntosX.length - 1; i++ ) {
+			while( x < this.puntosX[i+1] ) {
+				this.agregarPunto( new Punto( x, polinomioSpline(x, coef[i], this.puntosX[i]) ) );
+				x += h;
+			}
+		}
 	}
 	
 }
