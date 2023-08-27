@@ -50,6 +50,9 @@ export class Grafico {
 	}
 	borrarTodo() {
 		this.divHTML.replaceChildren('');
+		this.puntos  = [];
+		this.puntosX = [];
+		this.puntosY = [];
 	}
 	toggleBtnAgregarPuntos() {
 		this.btnAgregarPuntosAct = !this.btnAgregarPuntosAct;
