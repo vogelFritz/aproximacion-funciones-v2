@@ -67,6 +67,14 @@ main {
   z-index: 3;
 }
 
+.linea {
+  position: absolute;
+  background-color: beige;
+  height: 5px;
+  z-index: 3;
+  transform-origin: 0;
+}
+
 footer {
   background-color: cadetblue;
   z-index: 4;
