@@ -27,3 +27,19 @@ export const volverArrastrable = ( elemHTML, ventanaHTML ) => {
         ajustarPosicion(e);
     } );
 }
+
+
+export const agregarZoom = ( elemHTML ) => {
+    const aspectRatio = elemHTML.offsetWidth / elemHTML.offsetHeight,
+          growRate    = 0.1;
+    elemHTML.addEventListener( 'wheel', (e) => {
+        const deltaWidth   = e.deltaY * aspectRatio * growRate,
+              deltaHeight  = e.deltaY * growRate,
+              posRelativaX = ( e.clientX - elemHTML.offsetLeft ) / elemHTML.offsetWidth,
+              posRelativaY = ( e.clientY - elemHTML.offsetTop ) / elemHTML.offsetHeight;
+        elemHTML.style.width  = `${ elemHTML.offsetWidth + deltaWidth }px`;
+        elemHTML.style.height = `${ elemHTML.offsetHeight + deltaHeight }px`;
+        elemHTML.style.left   = `${ elemHTML.offsetLeft - deltaWidth * posRelativaX }px`;
+        elemHTML.style.top    = `${ elemHTML.offsetTop - deltaHeight * posRelativaY }px`;
+    } );
+}

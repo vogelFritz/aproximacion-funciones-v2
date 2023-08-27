@@ -1,4 +1,4 @@
-import { volverArrastrable } from './movimiento';
+import { agregarZoom, volverArrastrable } from './movimiento';
 
 // CLASES
 
@@ -11,6 +11,7 @@ export class Grafico {
 		this.divHTML = document.querySelector('.grafico');
         this.ventanaHTML = document.querySelector('.ventana');
         volverArrastrable( this.divHTML, this.ventanaHTML );
+		agregarZoom( this.divHTML );
 	}
 	agregarPunto( punto ) {
 		punto.divHTML.style.top  = `${ (punto.y / this.divHTML.offsetHeight ) * 100 }%`;
