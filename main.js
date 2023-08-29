@@ -8,7 +8,8 @@ const btnLimpiar = document.querySelector('#btn-limpiar'),
       btnAgregarPuntos = document.querySelector('#btn-agregar-puntos'),
       btnLagrange = document.querySelector('#btn-lagrange'),
       btnMinimosCuadrados = document.querySelector('#btn-min-cuadrados'),
-      btnSplinesCubicos = document.querySelector('#btn-splines-cubicos');
+      btnSplinesCubicos = document.querySelector('#btn-splines-cubicos'),
+      formMinimosCuadrados = document.querySelector('.form-min-cuadrados');
 btnLimpiar.addEventListener('click', () => {
     grafico.borrarTodo();
 });
@@ -21,12 +22,20 @@ btnLagrange.addEventListener( 'click', () => {
     grafico.graficarPolinomio( grafico.obtenerCoefLagrange() );
 } );
 
-btnMinimosCuadrados.addEventListener('click', () => {
-    grafico.graficarPolinomio( grafico.obtenerCoefMinimosCuadrados(5) );
-});
+// btnMinimosCuadrados.addEventListener('click', () => {
+//     grafico.graficarPolinomio( grafico.obtenerCoefMinimosCuadrados(5) );
+// });
 
 btnSplinesCubicos.addEventListener( 'click', () => {
     grafico.graficarSplinesCubicos();
+} );
+
+formMinimosCuadrados.addEventListener( 'submit', (e) => {
+    let grado;
+    e.preventDefault();
+    const formData = new FormData( formMinimosCuadrados );
+    grado = formData.get( 'grado-minimos-cuadrados' );
+    grafico.graficarPolinomio( grafico.obtenerCoefMinimosCuadrados(grado) );
 } );
 
 // FIN BOTONES
