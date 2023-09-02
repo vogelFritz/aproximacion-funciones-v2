@@ -21,8 +21,12 @@ export class Grafico {
 		this.divHTML.addEventListener( 'click', (e) => {
 			if( this.btnAgregarPuntosAct ) {
 				const posX = e.clientX - this.divHTML.offsetLeft,
-					posY = e.clientY - this.divHTML.offsetTop;
-				this.agregarPunto( new Punto( posX, posY ) );
+					  posY = e.clientY - this.divHTML.offsetTop,
+					  nuevoPunto = new Punto( posX, posY );
+				this.agregarPunto( nuevoPunto );
+				this.puntos.push( nuevoPunto );
+				this.puntosX.push( nuevoPunto.x );
+				this.puntosY.push( nuevoPunto.y);
 			}
 		} );
 	}
@@ -30,9 +34,6 @@ export class Grafico {
 		punto.divHTML.style.top  = `${ (punto.y / this.divHTML.offsetHeight ) * 100 }%`;
 		punto.divHTML.style.left = `${ (punto.x / this.divHTML.offsetWidth ) * 100 }%`;
 		this.divHTML.append( punto.divHTML );
-		this.puntos.push( punto );
-		this.puntosX.push( punto.x );
-		this.puntosY.push( punto.y );
 	}
 	agregarLinea( linea ) {
 		linea.divHTML.style.width = `${ (linea.largo / this.divHTML.offsetWidth) * 100 }%`;

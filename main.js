@@ -7,7 +7,6 @@ const grafico = new Grafico();
 const btnLimpiar = document.querySelector('#btn-limpiar'),
       btnAgregarPuntos = document.querySelector('#btn-agregar-puntos'),
       btnLagrange = document.querySelector('#btn-lagrange'),
-      btnMinimosCuadrados = document.querySelector('#btn-min-cuadrados'),
       btnSplinesCubicos = document.querySelector('#btn-splines-cubicos'),
       formMinimosCuadrados = document.querySelector('.form-min-cuadrados');
 btnLimpiar.addEventListener('click', () => {
